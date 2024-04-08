@@ -1,0 +1,12 @@
+spring:
+  main:
+    web-application-type: Reactive
+  cloud:
+    config:
+      enabled: false
+    gateway:
+      routes:
+        - id: Pagos-Microservise
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/pagos/**
