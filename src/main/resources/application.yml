@@ -10,3 +10,7 @@ spring:
           uri: http://localhost:8081
           predicates:
             - Path=/api/pagos/**
+        - id: mockapi-io
+          uri: https://6231568e05f5f4d40d781808.mockapi.io
+          predicates:
+            - Path=/**
