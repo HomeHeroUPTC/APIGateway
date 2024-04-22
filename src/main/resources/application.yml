@@ -1,16 +1,41 @@
+server:
+  port: 8082
+
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/spring-boot-realm-dev
+          jwk-set-uri: http://localhost:8080/realms/spring-boot-realm-dev/protocol/openid-connect/certs
   main:
     web-application-type: Reactive
+    allow-bean-definition-overriding: true
   cloud:
     config:
       enabled: false
     gateway:
       routes:
         - id: Pagos-Microservise
-          uri: http://localhost:8081
+          uri: http://localhost:8082
           predicates:
             - Path=/api/pagos/**
         - id: mockapi-io
           uri: https://6231568e05f5f4d40d781808.mockapi.io
           predicates:
             - Path=/**
+
+security:
+  oauth2:
+    resourceserver:
+      jwt:
+        issuer-uri: http://localhost:8080/realms/spring-boot-realm-dev
+        jwk-set-uri: http://localhost:8080/realms/spring-boot-realm-dev/protocol/openid-connect/certs
+
+jwt:
+  auth:
+    convert:
+      principle-attribute: preferred_username
+      resource-id: spring-apigateway-homehero
+
+
